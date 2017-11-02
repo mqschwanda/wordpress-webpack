@@ -1,0 +1,35 @@
+###
+# General
+.DS_Store
+.DS_Store?
+logs
+*.log
+*.dmg
+*.gz
+*.rar
+*.tar
+*.zip
+
+###
+# Node/Webpack
+node_modules
+npm-debug.log*
+pids
+*.pid
+*.seed
+*.pid.lock
+.npm
+.node_repl_history
+*.tgz
+*.hotpush.json
+
+###
+# ignore all files in Wordpress except for readme
+wordpress/**/*
+!wordpress/readme.md
+
+/.htaccess
+/license.txt
+/readme.html
+/sitemap.xml
+/sitemap.xml.gz
