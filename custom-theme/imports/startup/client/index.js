@@ -5,16 +5,10 @@
 
 import React from 'react';
 import { render } from 'react-dom';
-import { Provider } from 'react-redux';
-import store from 'reducers';
-import ReactRouter from './router';
-import '../../modules/dev-env.js';
+import { initDevPlugins } from 'modules';
 
-render(
-  <Provider store={store}>
-    <ReactRouter />
-  </Provider>,
-  document.getElementById('app'),
-);
+import App from './App';
 
-if (module && module.hot) module.hot.accept();
+render(<App />, document.getElementById('app'));
+
+initDevPlugins();

@@ -31,7 +31,11 @@ function custom_theme_setup()
      * This theme styles the visual editor to resemble the theme style,
      * specifically font, colors, and column width.
      */
-    add_editor_style(array('assets/stylesheets/editor-style.css'));
+    function custom_editor_style_js()
+    {
+        wp_enqueue_script('bundle-customizer', get_theme_file_uri('/assets/bundles/customizer.js'), array(), null, true);
+    }
+    add_action('customize_editor_enqueue_scripts', 'custom_editor_style_js');
 }
 add_action('after_setup_theme', 'custom_theme_setup');
 
@@ -41,7 +45,7 @@ add_action('after_setup_theme', 'custom_theme_setup');
  */
 function custom_theme_scripts()
 {
-    wp_enqueue_script('webpack-bundle', get_theme_file_uri('/assets/bundle/index.js'), array(), null, true);
+    wp_enqueue_script('webpack-bundle', get_theme_file_uri('/assets/bundles/index.js'), array(), null, true);
 }
 add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 

@@ -1,9 +1,8 @@
 import DashboardPlugin from 'webpack-dashboard/plugin';
 import OpenBrowserPlugin from 'open-browser-webpack-plugin';
-import { join } from 'path';
+import path from 'path';
 import { compiler, THEME_NAME } from './';
 
-compiler.context = join(__dirname, '../../');
 compiler.devtool = 'eval-source-map';
 compiler.plugins = [
   ...compiler.plugins,
@@ -23,7 +22,7 @@ const proxyConfig = {
 };
 compiler.devServer = {
   contentBase: `./wordpress/wp-content/themes/${THEME_NAME}/assets`,
-  outputPath: join(__dirname, `../../wordpress/wp-content/themes/${THEME_NAME}/assets`),
+  outputPath: path.join(compiler.context, `/wordpress/wp-content/themes/${THEME_NAME}/assets`),
   proxy: {
     '/': proxyConfig,
     '**': proxyConfig,

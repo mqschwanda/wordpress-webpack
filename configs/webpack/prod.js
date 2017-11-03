@@ -8,7 +8,9 @@ compiler.plugins = [
   new webpack.optimize.UglifyJsPlugin({
     minimize: true,
     sourceMap: false,
-    output: { comments: false },
+    output: {
+      comments: false,
+    },
   }),
 ];
 

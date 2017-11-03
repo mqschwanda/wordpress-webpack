@@ -1,4 +1,4 @@
-module.exports =
+export const initDevPlugins = () => {
   document.addEventListener('DOMContentLoaded', () => {
     if (window.location.href.indexOf('localhost')) {
       const links = [...document.getElementsByTagName('a')];
@@ -8,3 +8,6 @@ module.exports =
       });
     }
   }, false);
+
+  if (module && module.hot) module.hot.accept();
+};

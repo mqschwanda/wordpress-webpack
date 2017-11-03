@@ -29,7 +29,7 @@ export default class Theme extends React.PureComponent {
   render() {
     return (
       <ThemeProvider theme={theme}>
-        { this.props.children }
+        {this.props.children}
       </ThemeProvider>
     );
   }
