@@ -39,24 +39,24 @@ exports.compiler = {
     loaders: [{
       test: /\.(js|jsx)$/,
       exclude: /node_modules/,
-      loader: 'babel',
+      loader: 'babel-loader',
       query: {
         presets: ['es2015', 'react'],
       },
     }, {
       test: /\.(png|jpg|gif)$/,
-      loader: 'url?limit=10000',
+      loader: 'url-loader?limit=10000',
       exclude: /node_modules/,
     }, {
       test: /\.css$/,
       loader: 'style-loader!css-loader',
     }],
   },
-  postcss() {
-    return [autoprefixer({
-      browsers: ['last 2 versions', '> 5%', 'Firefox ESR'],
-    })];
-  },
+  // postcss() {
+  //   return [autoprefixer({
+  //     browsers: ['last 2 versions', '> 5%', 'Firefox ESR'],
+  //   })];
+  // },
   plugins: [
     new CopyWebpackPlugin([{
       context: appendAppDirname(`${THEME_NAME}/wp-content`),
