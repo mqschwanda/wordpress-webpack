@@ -1,1 +1,1 @@
-webpack-dashboard -- webpack-dev-server --inline --hot --port=3000 --config webpack-configs/webpack.dev.js
+node -r babel-register ./node_modules/webpack-dashboard/bin/webpack-dashboard -- node -r babel-register ./node_modules/webpack-dev-server/bin/webpack-dev-server --inline --hot --port=3000 --config configs/webpack/dev.js

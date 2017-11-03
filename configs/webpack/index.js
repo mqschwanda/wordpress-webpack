@@ -1,15 +1,14 @@
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const WriteFilePlugin = require('write-file-webpack-plugin');
-const path = require('path');
+import webpack from 'webpack';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
+import WriteFilePlugin from 'write-file-webpack-plugin';
+import path from 'path';
 
-const THEME_NAME = 'custom-theme';
-exports.THEME_NAME = THEME_NAME;
+const appendAppDirname = uri => path.join(path.resolve(__dirname, '../../'), uri);
 
-const appendAppDirname = uri => path.resolve(__dirname, uri);
+export const THEME_NAME = 'custom-theme';
 
-exports.compiler = {
+
+export const compiler = {
   entry: {
     index: appendAppDirname(`${THEME_NAME}/imports/startup/client/index.js`),
   },
@@ -29,11 +28,11 @@ exports.compiler = {
       icons: appendAppDirname(`${THEME_NAME}/imports/ui/icons`),
       layouts: appendAppDirname(`${THEME_NAME}/imports/ui/layouts`),
     },
-    // extensions: [
-    //   '*',
-    //   '.js',
-    //   '.jsx',
-    // ],
+    extensions: [
+      '*',
+      '.js',
+      '.jsx',
+    ],
   },
   module: {
     loaders: [{
@@ -52,11 +51,6 @@ exports.compiler = {
       loader: 'style-loader!css-loader',
     }],
   },
-  // postcss() {
-  //   return [autoprefixer({
-  //     browsers: ['last 2 versions', '> 5%', 'Firefox ESR'],
-  //   })];
-  // },
   plugins: [
     new CopyWebpackPlugin([{
       context: appendAppDirname(`${THEME_NAME}/wp-content`),
