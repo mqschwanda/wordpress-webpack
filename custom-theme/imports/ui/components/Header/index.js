@@ -5,16 +5,16 @@
 import styled from 'styled-components';
 
 export default styled.header`
-  height: ${props => props.theme.headerHeight};
-  line-height: ${props => props.theme.headerLineHeight};
-  font-size: ${props => props.theme.headerFontSize};
-  color: ${props => props.theme.headerColor};
-  background-color: ${props => props.theme.headerBgColor};
-  box-shadow: ${props => props.theme.componentShadow};
+  height: ${({ theme }) => theme.headerHeight};
+  line-height: ${({ theme }) => theme.headerLineHeight};
+  font-size: ${({ theme }) => theme.headerFontSize};
+  color: ${({ theme }) => theme.headerColor};
+  background-color: ${({ theme }) => theme.headerBgColor};
+  box-shadow: ${({ theme }) => theme.componentShadow};
 
-  @media ${props => props.theme.smallAndDown}
+  @media ${({ theme }) => theme.smallAndDown}
   {
-    height: ${props => props.theme.headerHeightMobile};
-    line-height: ${props => props.theme.headerLineHeightMobile};
+    height: ${({ theme }) => theme.headerHeightMobile};
+    line-height: ${({ theme }) => theme.headerLineHeightMobile};
   }
 `;

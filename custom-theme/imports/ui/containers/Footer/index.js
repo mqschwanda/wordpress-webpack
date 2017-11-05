@@ -1,16 +1,21 @@
-import React, { PureComponent } from 'react';
-import { Footer as FooterWrap, Container } from 'components';
+import React from 'react';
 
-export default class Footer extends PureComponent {
-  render() {
-    return (
-      <FooterWrap>
-        <Container>
-          <a href="https://github.com/mqschwanda" style={{ position: 'absolute', bottom: 0 }}>
-            GitHub
-          </a>
-        </Container>
-      </FooterWrap>
-    );
-  }
-}
+import { Footer, Container, Copyright, FooterNav, Nav, NavWrapper } from 'components';
+import { Menu } from 'containers';
+
+const copyright = 'MQSchwanda';
+
+export default () => (
+  <Footer>
+    <FooterNav>
+      <Container>
+        <Nav>
+          <NavWrapper>
+            <Copyright>&copy; { copyright }</Copyright>
+            <Menu footer />
+          </NavWrapper>
+        </Nav>
+      </Container>
+    </FooterNav>
+  </Footer>
+);

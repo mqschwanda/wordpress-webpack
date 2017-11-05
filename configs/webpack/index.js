@@ -30,6 +30,7 @@ export const compiler = {
       containers: appendAppDirname(`${THEME_NAME}/imports/ui/containers`),
       icons: appendAppDirname(`${THEME_NAME}/imports/ui/icons`),
       layouts: appendAppDirname(`${THEME_NAME}/imports/ui/layouts`),
+      pages: appendAppDirname(`${THEME_NAME}/imports/ui/pages`),
       stylesheets: appendAppDirname(`${THEME_NAME}/imports/ui/stylesheets`),
     },
     extensions: ['*', '.js', '.jsx'],

@@ -22,11 +22,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <?php wp_head(); ?>
 </head>
-
 <body>
-  <!-- inject react node -->
-  <?php /* do something here */ ?>
-  <div id="app"></div>
+  <div id="react-root"></div>
 
   <?php wp_footer(); ?>
 </body>

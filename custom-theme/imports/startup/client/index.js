@@ -6,9 +6,18 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { initDevPlugins } from 'modules';
+import { App } from 'layouts';
+import Router from './Router';
+import Provider from './Provider';
 
-import App from './App';
+const ReactRoot = () => (
+  <Provider>
+    <App>
+      <Router />
+    </App>
+  </Provider>
+);
 
-render(<App />, document.getElementById('app'));
+render(<ReactRoot />, document.getElementById('react-root'));
 
 initDevPlugins();

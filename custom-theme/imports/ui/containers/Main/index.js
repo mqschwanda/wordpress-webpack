@@ -1,14 +1,12 @@
-import React, { PureComponent } from 'react';
-import { Main as MainWrap, Container } from 'components';
+import React from 'react';
 
-export default class Main extends PureComponent {
-  render() {
-    return (
-      <MainWrap>
-        <Container>
-          Main
-        </Container>
-      </MainWrap>
-    );
-  }
-}
+import { Main, Container } from 'components';
+import { ConnectedChildren } from 'modules';
+
+export default ({ ...props }) => (
+  <Main>
+    <Container>
+      <ConnectedChildren {...props} />
+    </Container>
+  </Main>
+);

@@ -1,17 +1,40 @@
+/**
+ We can dispatch navigation actions from anywhere!
+ `
+   import { push } from 'react-router-redux'; // import
+   store.dispatch(push('/foo')); // use
+ `
+ */
+
 import React from 'react';
-import { Route, Switch } from 'react-router';
+import { Route, Switch, Redirect } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
-import { App } from 'layouts';
+import { Home, NotFound, Page, Post } from 'pages';
 import { history } from 'reducers/router';
 
-// can dispatch navigation actions from anywhere!
-// import { push } from 'react-router-redux';
-// store.dispatch(push('/foo'))
+const routes = [{
+  path: '/',
+  exact: true,
+  component: () => <Redirect to="/home" />,
+}, {
+  path: '/home',
+  component: Home,
+}, {
+  path: '/page',
+  component: Page,
+}, {
+  path: '/post',
+  component: Post,
+}, {
+  path: '*',
+  component: NotFound,
+}];
+
 
 export default () => (
   <ConnectedRouter history={history}>
     <Switch>
-      <Route path="*" component={App} />
+      {routes.map(route => <Route {...route} key={route.path} />)}
     </Switch>
   </ConnectedRouter>
 );
