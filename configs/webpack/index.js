@@ -61,8 +61,8 @@ export const compiler = {
           {
             loader: 'style-loader',
             options: {
-              insertAt: 'top',
-            }, // insert style elements at the beginning of the `<head>`
+              insertAt: 'top', // insert style elements at the beginning of the `<head>`
+            },
           }, {
             loader: 'css-loader',
           },

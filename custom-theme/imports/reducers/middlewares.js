@@ -1,6 +1,8 @@
 /* eslint-disable no-console */
 
 import { applyMiddleware } from 'redux';
-import { routerMiddleware } from './router';
+import thunk from 'redux-thunk';
 
-export default applyMiddleware(routerMiddleware);
+import { routerMiddleware as router } from './router';
+
+export default applyMiddleware(router, thunk);

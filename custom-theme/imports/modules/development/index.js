@@ -1,4 +1,4 @@
-const fixHref = () => {
+const fixLinkHref = () => {
   if (window.location.href.indexOf('localhost')) {
     const links = [...document.getElementsByTagName('a')];
     links.forEach((link) => {
@@ -8,9 +8,8 @@ const fixHref = () => {
   }
 };
 
-
 export const initDevPlugins = () => {
-  document.addEventListener('DOMContentLoaded', fixHref, false);
+  document.addEventListener('DOMContentLoaded', fixLinkHref, false);
   if (module && module.hot) module.hot.accept();
 };
 export default initDevPlugins;

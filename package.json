@@ -5,6 +5,7 @@
   "description": "Build Wordpress themes using Webpack and Hot Module Reloading",
   "main": "index.js",
   "dependencies": {
+    "axios": "^0.17.0",
     "color": "^2.0.0",
     "history": "^4.7.2",
     "normalize.css": "^7.0.0",
@@ -14,7 +15,9 @@
     "react-router": "^4.2.0",
     "react-router-redux": "^5.0.0-alpha.8",
     "redux": "^3.7.2",
-    "styled-components": "^2.2.3"
+    "redux-thunk": "^2.2.0",
+    "styled-components": "^2.2.3",
+    "url": "^0.11.0"
   },
   "devDependencies": {
     "babel-core": "^6.13.2",
