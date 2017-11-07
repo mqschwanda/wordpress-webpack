@@ -20,8 +20,8 @@ const routes = [{
   path: '/home',
   component: Home,
 }, {
-  path: '/page',
-  component: Page,
+  path: '/not-found',
+  component: NotFound,
 }, {
   path: '/posts',
   component: Posts,
@@ -31,8 +31,8 @@ const routes = [{
   path: '/posts/:slug',
   component: Post,
 }, {
-  path: '*',
-  component: NotFound,
+  path: '/:slug',
+  component: Page,
 }];
 
 

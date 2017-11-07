@@ -16,8 +16,8 @@ export default class MainWrap extends React.Component {
   componentDidMount() {
     getPages();
     getPosts();
-    getTags();
-    getCategories();
+    // getTags();
+    // getCategories();
   }
   render() {
     return (

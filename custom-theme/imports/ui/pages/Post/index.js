@@ -1,24 +1,37 @@
 import React from 'react';
 import { Post } from 'containers';
 import { pushPath } from 'modules';
-import store from 'reducers';
+import { connect } from 'react-redux'; // eslint-disable-line no-unused-vars
 
-const getPost = (props) => {
-  console.log({ props });
-  const { posts } = store.getState().wordpress;
-  const { slug } = props.match.params;
+@connect(({ wordpress: { posts }, location }) => ({ posts, location }))
+export default class PostPage extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = { post: {} };
+    this.getPost = this.getPost.bind(this);
+  }
+  componentDidMount() {
+    this.getPost();
+  }
+  componentDidUpdate() {
+    this.getPost();
+  }
+  getPost() {
+    const { posts } = this.props;
+    const { slug } = this.props.match.params;
 
-  for (let i = 0; i < posts.length; i += 1) {
-    if (posts[i].slug === slug) {
-      return posts[i];
-    } else if (i === posts.length - 1) {
-      pushPath('/not-found');
+    for (let i = 0; i < posts.length; i += 1) {
+      if (posts[i].slug === slug) {
+        this.setState({ post: posts[i] });
+        i = posts.length;
+      } else if (i === posts.length - 1) pushPath('/not-found');
     }
   }
-};
-
-export default ({ ...props }) => (
-  <div>
-    <Post {...getPost(props)} />
-  </div>
-);
+  render() {
+    return (
+      <div>
+        <Post {...this.state.post} />
+      </div>
+    );
+  }
+}

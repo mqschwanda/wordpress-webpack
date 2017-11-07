@@ -30,7 +30,7 @@ export const FooterNav = styled.div`
   bottom: 0;
   left: 0;
   right: 0;
-  height: 40px;
+  height: ${({ theme }) => theme.footerHeight};
   color: ${({ theme }) => theme.white};
   background-color: ${({ theme }) => theme.headerBgColor};
 `;
@@ -38,7 +38,7 @@ export const FooterNav = styled.div`
 export const Copyright = styled.div`
   position: relative;
   float: left;
-  line-height: 40px;
+  line-height: ${({ theme }) => theme.footerHeight};
   font-size: 12px;
   opacity: 0.5;
   color: ${({ theme }) => theme.white};

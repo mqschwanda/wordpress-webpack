@@ -86,6 +86,7 @@ export default {
   footerBgColor: primaryColor,
   footerCopyrightColor: 'rgba(255,255,255,.8)',
   footerCopyrightBgColor: 'rgba(51,51,51,.08)',
+  footerHeight: '40px',
   // Components
   componentShadow: zDepth1,
   componentShadowHover: zDepth2,
