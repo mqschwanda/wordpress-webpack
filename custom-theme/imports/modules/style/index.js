@@ -19,6 +19,11 @@ export const InjectGlobalStyle = () => {
       font-family: Roboto;
     }
 
+    img
+    {
+      max-width: 100%;
+    }
+
   `;
 };
 

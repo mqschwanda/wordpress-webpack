@@ -10,7 +10,7 @@ export default ({ ...props }) => (
       <NavLink pathTo="/page">Page</NavLink>
     </NavListItem>
     <NavListItem>
-      <NavLink pathTo="/post">Post</NavLink>
+      <NavLink pathTo="/posts">Posts</NavLink>
     </NavListItem>
   </NavList>
 );

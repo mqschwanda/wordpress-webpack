@@ -26,7 +26,7 @@ export const Footer = styled.footer`
 `;
 
 export const FooterNav = styled.div`
-  position: absolute;
+  position: relative;
   bottom: 0;
   left: 0;
   right: 0;

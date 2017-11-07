@@ -9,7 +9,7 @@
 import React from 'react';
 import { Route, Switch, Redirect } from 'react-router';
 import { ConnectedRouter } from 'react-router-redux';
-import { Home, NotFound, Page, Post } from 'pages';
+import { Home, NotFound, Page, Posts, Post } from 'pages';
 import { history } from 'reducers/router';
 
 const routes = [{
@@ -23,7 +23,12 @@ const routes = [{
   path: '/page',
   component: Page,
 }, {
-  path: '/post',
+  path: '/posts',
+  component: Posts,
+  exact: true,
+  strict: true,
+}, {
+  path: '/posts/:slug',
   component: Post,
 }, {
   path: '*',

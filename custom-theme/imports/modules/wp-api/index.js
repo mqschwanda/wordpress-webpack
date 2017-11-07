@@ -137,12 +137,21 @@ export const WP = axios.create({
   // cancelToken: new CancelToken(((cancel) => {})),
 });
 
-const mapResponseData = (record) => {
-  switch (record.type) {
+const mapResponseData = (data) => {
+  switch (data.type) {
     case 'post':
-      // console.log({ record });
-      return record;
-    default: return record;
+      // console.log({ data });
+      return data;
+    case 'tag':
+      // console.log({ data });
+      return data;
+    case 'category':
+      // console.log({ data });
+      return data;
+    case 'page':
+      // console.log({ data });
+      return data;
+    default: return data;
   }
 };
 
@@ -150,36 +159,36 @@ const buildOptions = ({ ...args }) => ({ ...args, params: { page: 1, per_page: 1
 
 const catchError = error => console.log(error);
 
-const handleNextPage = (res, callback) => {
+const handleNextPage = (res, next) => {
   const totalPages = res.headers['x-wp-totalpages'];
   const url = new URL(res.request.responseURL);
   const page = parseInt(url.searchParams.get('page') || 0) + 1;
-  if (page <= totalPages) callback({ params: { page } });
+  if (page <= totalPages) next({ params: { page } });
 };
 
 // Send a POST request
-export const getPosts = ({ ...args }) => WP.get('/posts', buildOptions(args))
-  .then((response) => {
-    store.dispatch(updatePosts(response.data));
-    handleNextPage(response, getPosts);
+export const getPosts = ({ ...args }) => WP.get('/posts', buildOptions({ ...args }))
+  .then((res) => {
+    store.dispatch(updatePosts(res.data));
+    handleNextPage(res, getPosts);
   })
   .catch(catchError);
 
-export const getPost = ({ ...args }) => WP.get('/posts', buildOptions(args)).catch(catchError);
+export const getPost = ({ ...args }) => WP.get('/posts', buildOptions({ ...args })).catch(catchError);
 
-export const getPages = ({ ...args }) => WP.get('/pages', buildOptions(args))
-  .then((response) => {
-    store.dispatch(updatePages(response.data));
-    handleNextPage(response, getPages);
+export const getPages = ({ ...args }) => WP.get('/pages', buildOptions({ ...args }))
+  .then((res) => {
+    store.dispatch(updatePages(res.data));
+    handleNextPage(res, getPages);
   })
   .catch(catchError);
 
-export const getPage = ({ ...args }) => WP.get('/page', buildOptions(args)).catch(catchError);
+export const getPage = ({ ...args }) => WP.get('/page', buildOptions({ ...args })).catch(catchError);
 
-export const getTags = ({ ...args }) => WP.get('/tags', buildOptions(args))
-  .then((response) => {
-    store.dispatch(updateTags(response.data));
-    handleNextPage(response, getTags);
+export const getTags = ({ ...args }) => WP.get('/tags', buildOptions({ ...args }))
+  .then((res) => {
+    store.dispatch(updateTags(res.data));
+    handleNextPage(res, getTags);
   })
   .catch(catchError);
 
@@ -188,10 +197,10 @@ export const getTag = ({ ...args }) => {
   return WP.get('/tag', { ...args, params }).catch(catchError);
 };
 
-export const getCategories = ({ ...args }) => WP.get('/categories', buildOptions(args))
-  .then((response) => {
-    store.dispatch(updateCategories(response.data));
-    handleNextPage(response, getCategories);
+export const getCategories = ({ ...args }) => WP.get('/categories', buildOptions({ ...args }))
+  .then((res) => {
+    store.dispatch(updateCategories(res.data));
+    handleNextPage(res, getCategories);
   }).catch(catchError);
 
 export default {
