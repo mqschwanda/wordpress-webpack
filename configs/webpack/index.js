@@ -1,8 +1,12 @@
 import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WriteFilePlugin from 'write-file-webpack-plugin';
+import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 
+const extractStyle = new ExtractTextPlugin({
+  filename: getPath => getPath('../style.css'),
+});
 export const THEME_NAME = 'custom-theme';
 export const context = path.resolve(__dirname, '../../');
 
@@ -57,16 +61,19 @@ export const compiler = {
         ],
       }, {
         test: /\.css$/,
-        use: [
-          {
-            loader: 'style-loader',
-            options: {
-              insertAt: 'top', // insert style elements at the beginning of the `<head>`
-            },
-          }, {
-            loader: 'css-loader',
-          },
-        ],
+        use: extractStyle.extract({
+          fallback: 'style-loader',
+          use: ['css-loader'],
+        }),
+      }, {
+        test: /\.sass$/,
+        use: extractStyle.extract({
+          fallback: 'style-loader',
+          use: [
+            'css-loader', // translates CSS into CommonJS
+            'sass-loader', // compiles Sass to CSS
+          ],
+        }),
       }, {
         test: /\.(ttf|eot|otf|woff|woff2)$/,
         use: [
@@ -94,5 +101,6 @@ export const compiler = {
       ignore: ['./stylesheets', './javascripts', './index.js'],
     }),
     new WriteFilePlugin(),
+    extractStyle,
   ],
 };
