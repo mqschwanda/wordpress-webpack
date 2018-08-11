@@ -1,13 +1,15 @@
 {
   "plugins": [
-    "transform-react-jsx",
-    "transform-decorators-legacy",
+    ["@babel/plugin-proposal-decorators", { "legacy": true }],
     "transform-class-properties",
-    "babel-plugin-styled-components"
+    "babel-plugin-styled-components",
+    "@babel/plugin-syntax-dynamic-import",
+    "@babel/plugin-syntax-import-meta",
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-json-strings"
   ],
   "presets": [
-    "env",
-    "react",
-    "stage-3"
+    "@babel/preset-env",
+    "@babel/preset-react"
   ]
 }
