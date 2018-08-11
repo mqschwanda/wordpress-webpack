@@ -22,7 +22,10 @@ const proxyConfig = {
 };
 compiler.devServer = {
   contentBase: `./wordpress/wp-content/themes/${THEME_NAME}/assets`,
-  outputPath: path.join(compiler.context, `/wordpress/wp-content/themes/${THEME_NAME}/assets`),
+  outputPath: path.join(
+    compiler.context,
+    `/wordpress/wp-content/themes/${THEME_NAME}/assets`
+  ),
   proxy: {
     '/': proxyConfig,
     '**': proxyConfig,

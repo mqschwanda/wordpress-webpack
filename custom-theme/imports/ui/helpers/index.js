@@ -17,4 +17,5 @@ export const encodeHtml = (str) => {
  *
  * @param {String} str htmlSet entities
  * */
-export const decodeHtml = str => str.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));
+export const decodeHtml = str =>
+  str.replace(/&#(\d+);/g, (match, dec) => String.fromCharCode(dec));

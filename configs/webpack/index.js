@@ -1,4 +1,4 @@
-import webpack from 'webpack';
+// import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WriteFilePlugin from 'write-file-webpack-plugin';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
@@ -40,64 +40,54 @@ export const compiler = {
     extensions: ['*', '.js', '.jsx'],
   },
   module: {
-    loaders: [
-      {
-        test: /\.(js|jsx)?$/,
-        exclude: /node_modules/,
+    loaders: [{
+      test: /\.(js|jsx)?$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'babel-loader',
+      }],
+    }, { // react icons
+      test: /react-icons\/(.)*.(js|jsx)?$/,
+      use: [{
+        loader: 'babel-loader',
+        query: {
+          presets: ['es2015', 'react'],
+        },
+      }],
+    }, {
+      test: /\.css$/,
+      use: extractStyle.extract({
+        fallback: 'style-loader',
+        use: ['css-loader'],
+      }),
+    }, {
+      test: /\.sass$/,
+      use: extractStyle.extract({
+        fallback: 'style-loader',
         use: [
-          {
-            loader: 'babel-loader',
-          },
+          'css-loader', // translates CSS into CommonJS
+          'sass-loader', // compiles Sass to CSS
         ],
-      }, { // react icons
-        test: /react-icons\/(.)*.(js|jsx)?$/,
-        use: [
-          {
-            loader: 'babel-loader',
-            query: {
-              presets: ['es2015', 'react'],
-            },
-          },
-        ],
-      }, {
-        test: /\.css$/,
-        use: extractStyle.extract({
-          fallback: 'style-loader',
-          use: ['css-loader'],
-        }),
-      }, {
-        test: /\.sass$/,
-        use: extractStyle.extract({
-          fallback: 'style-loader',
-          use: [
-            'css-loader', // translates CSS into CommonJS
-            'sass-loader', // compiles Sass to CSS
-          ],
-        }),
-      }, {
-        test: /\.(ttf|eot|otf|woff|woff2)$/,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: 'fonts/[name].[ext]',
-            },
-          },
-        ],
-      }, {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: ['url-loader?limit=10000', 'img-loader'],
-      },
-    ],
+      }),
+    }, {
+      test: /\.(ttf|eot|otf|woff|woff2)$/,
+      use: [{
+        loader: 'file-loader',
+        options: {
+          name: 'fonts/[name].[ext]',
+        },
+      }],
+    }, {
+      test: /\.(jpe?g|png|gif|svg)$/i,
+      use: ['url-loader?limit=10000', 'img-loader'],
+    }],
   },
   plugins: [
-    new CopyWebpackPlugin([
-      {
-        context: appendAppDirname(`${THEME_NAME}/wp-content`),
-        from: './**/*',
-        to: '../',
-      },
-    ], {
+    new CopyWebpackPlugin([{
+      context: appendAppDirname(`${THEME_NAME}/wp-content`),
+      from: './**/*',
+      to: '../',
+    }], {
       ignore: ['./stylesheets', './javascripts', './index.js'],
     }),
     new WriteFilePlugin(),

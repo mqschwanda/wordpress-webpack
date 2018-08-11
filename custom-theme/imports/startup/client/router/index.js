@@ -36,10 +36,12 @@ const routes = [{
 }];
 
 
-export default () => (
+export const Router = () => (
   <ConnectedRouter history={history}>
     <Switch>
       {routes.map(route => <Route {...route} key={route.path} />)}
     </Switch>
   </ConnectedRouter>
 );
+
+export default Router;
