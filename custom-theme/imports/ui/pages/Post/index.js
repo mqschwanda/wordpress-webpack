@@ -1,5 +1,6 @@
 import React from 'react';
 import { Post } from 'containers';
+import { App } from 'layouts';
 import { pushPath } from 'modules';
 import { connect } from 'react-redux'; // eslint-disable-line no-unused-vars
 
@@ -29,9 +30,9 @@ export default class PostPage extends React.PureComponent {
   }
   render() {
     return (
-      <div>
+      <App>
         <Post {...this.state.post} />
-      </div>
+      </App>
     );
   }
 }

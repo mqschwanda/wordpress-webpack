@@ -7,4 +7,7 @@ import React from 'react';
 import { Provider } from 'react-redux';
 import store from 'reducers';
 
-export default props => <Provider store={store} {...props} />;
+export const Redux = props =>
+  <Provider store={store} {...props} />;
+
+export default Redux;

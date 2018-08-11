@@ -1,5 +1,6 @@
 import React from 'react';
 import { ContentBox } from 'components';
+import { App } from 'layouts';
 import { pushPath } from 'modules';
 import { connect } from 'react-redux'; // eslint-disable-line no-unused-vars
 
@@ -29,11 +30,11 @@ export default class Page extends React.PureComponent {
   }
   render() {
     return (
-      <div>
+      <App>
         {this.state.page.content ? (
           <ContentBox dangerouslySetInnerHTML={{ __html: this.state.page.content.rendered }} />
         ) : ''}
-      </div>
+      </App>
     );
   }
 }

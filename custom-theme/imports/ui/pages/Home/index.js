@@ -1,5 +1,8 @@
 import React from 'react';
+import { App } from 'layouts';
 
 export default () => (
-  <div>Home</div>
+  <App>
+    <div>Home</div>
+  </App>
 );

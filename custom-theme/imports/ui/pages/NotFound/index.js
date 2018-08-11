@@ -1,7 +1,8 @@
 import React from 'react';
+import { App } from 'layouts';
 
 export default () => (
-  <div>
+  <App>
     {window.location.pathname} Not Found
-  </div>
+  </App>
 );

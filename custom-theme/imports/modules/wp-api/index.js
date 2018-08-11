@@ -1,8 +1,30 @@
 // import request from 'request';
 import axios from 'axios';
-
 import store from 'reducers';
-import { updatePages, updatePosts, updateTags, updateCategories } from 'reducers/wordpress';
+import {
+  updatePages,
+  updatePosts,
+  updateTags,
+  updateCategories,
+} from 'reducers/wordpress';
+
+const mapResponseData = (data) => {
+  switch (data.type) {
+    case 'post':
+      // console.log({ data });
+      return data;
+    case 'tag':
+      // console.log({ data });
+      return data;
+    case 'category':
+      // console.log({ data });
+      return data;
+    case 'page':
+      // console.log({ data });
+      return data;
+    default: return data;
+  }
+};
 
 
 // Set config defaults when creating the instance
@@ -137,27 +159,12 @@ export const WP = axios.create({
   // cancelToken: new CancelToken(((cancel) => {})),
 });
 
-const mapResponseData = (data) => {
-  switch (data.type) {
-    case 'post':
-      // console.log({ data });
-      return data;
-    case 'tag':
-      // console.log({ data });
-      return data;
-    case 'category':
-      // console.log({ data });
-      return data;
-    case 'page':
-      // console.log({ data });
-      return data;
-    default: return data;
-  }
-};
+const buildOptions = ({ params = {}, ...args } = {}) =>
+  ({ ...args, params: { page: 1, per_page: 100, ...params } });
 
-const buildOptions = ({ ...args }) => ({ ...args, params: { page: 1, per_page: 100, ...args.params } });
-
-const catchError = error => console.log(error);
+const catchError = (error) => { // eslint-disable no-console
+  console.error(error);
+}; // eslint-enable no-console
 
 const handleNextPage = (res, next) => {
   const totalPages = res.headers['x-wp-totalpages'];
@@ -167,41 +174,46 @@ const handleNextPage = (res, next) => {
 };
 
 // Send a POST request
-export const getPosts = ({ ...args }) => WP.get('/posts', buildOptions({ ...args }))
-  .then((res) => {
-    store.dispatch(updatePosts(res.data));
-    handleNextPage(res, getPosts);
-  })
-  .catch(catchError);
+export const getPosts = options =>
+  WP.get('/posts', buildOptions(options))
+    .then((res) => {
+      store.dispatch(updatePosts(res.data));
+      handleNextPage(res, getPosts);
+    })
+    .catch(catchError);
 
-export const getPost = ({ ...args }) => WP.get('/posts', buildOptions({ ...args })).catch(catchError);
+export const getPost = options =>
+  WP.get('/posts', buildOptions(options)).catch(catchError);
 
-export const getPages = ({ ...args }) => WP.get('/pages', buildOptions({ ...args }))
-  .then((res) => {
-    store.dispatch(updatePages(res.data));
-    handleNextPage(res, getPages);
-  })
-  .catch(catchError);
+export const getPages = options =>
+  WP.get('/pages', buildOptions(options))
+    .then((res) => {
+      store.dispatch(updatePages(res.data));
+      handleNextPage(res, getPages);
+    })
+    .catch(catchError);
 
-export const getPage = ({ ...args }) => WP.get('/page', buildOptions({ ...args })).catch(catchError);
+export const getPage = options =>
+  WP.get('/page', buildOptions(options)).catch(catchError);
 
-export const getTags = ({ ...args }) => WP.get('/tags', buildOptions({ ...args }))
-  .then((res) => {
-    store.dispatch(updateTags(res.data));
-    handleNextPage(res, getTags);
-  })
-  .catch(catchError);
+export const getTags = options =>
+  WP.get('/tags', buildOptions(options))
+    .then((res) => {
+      store.dispatch(updateTags(res.data));
+      handleNextPage(res, getTags);
+    })
+    .catch(catchError);
 
-export const getTag = ({ ...args }) => {
-  const params = { page: 1, per_page: 1, ...args.params };
-  return WP.get('/tag', { ...args, params }).catch(catchError);
-};
+export const getTag = ({ params = {}, ...args }) =>
+  WP.get('/tag', { ...args, params: { page: 1, per_page: 1, ...params } })
+    .catch(catchError);
 
-export const getCategories = ({ ...args }) => WP.get('/categories', buildOptions({ ...args }))
-  .then((res) => {
-    store.dispatch(updateCategories(res.data));
-    handleNextPage(res, getCategories);
-  }).catch(catchError);
+export const getCategories = options =>
+  WP.get('/categories', buildOptions(options))
+    .then((res) => {
+      store.dispatch(updateCategories(res.data));
+      handleNextPage(res, getCategories);
+    }).catch(catchError);
 
 export default {
   getPosts, getPost, getPages, getPage, getTags, getTag, getCategories,

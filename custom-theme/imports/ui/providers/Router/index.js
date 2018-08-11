@@ -39,7 +39,9 @@ const routes = [{
 export const Router = () => (
   <ConnectedRouter history={history}>
     <Switch>
-      {routes.map(route => <Route {...route} key={route.path} />)}
+      {routes.map(route => (
+        <Route {...route} key={route.path} />
+      ))}
     </Switch>
   </ConnectedRouter>
 );
