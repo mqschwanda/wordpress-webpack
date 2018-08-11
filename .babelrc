@@ -1,6 +1,8 @@
 {
   "plugins": [
     ["@babel/plugin-proposal-decorators", { "legacy": true }],
+    "babel-plugin-transform-export-extensions",
+    "@babel/plugin-syntax-export-namespace-from",
     "transform-class-properties",
     "babel-plugin-styled-components",
     "@babel/plugin-syntax-dynamic-import",

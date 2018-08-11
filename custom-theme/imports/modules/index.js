@@ -1,6 +1,17 @@
-export { default as Theme } from './style';
+export * as theme from './theme';
+
 export { default as initDevPlugins } from './development';
-export { pushPath, ConnectedChildren } from './react-router';
+
+export {
+  encodeHtml,
+  decodeHtml,
+} from './html-encoders';
+
+export {
+  pushPath,
+  ConnectedChildren,
+} from './react-router';
+
 export {
   default as WP,
   getPosts,

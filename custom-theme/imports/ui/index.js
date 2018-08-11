@@ -3,17 +3,11 @@
   `main.html` file.
 * */
 
-import 'normalize.css/normalize.css';
 import React from 'react';
 import { render } from 'react-dom';
 import { initDevPlugins } from 'modules';
-import { Redux, Router } from 'providers';
 
-const ReactRoot = () => (
-  <Redux>
-    <Router />
-  </Redux>
-);
+import { ReactRoot } from './ReactRoot';
 
 render(<ReactRoot />, document.getElementById('react-root'));
 

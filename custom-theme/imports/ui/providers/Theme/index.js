@@ -1,15 +1,14 @@
-import React from 'react';
+import 'normalize.css';
+import React, { PureComponent } from 'react';
 import { injectGlobal, ThemeProvider } from 'styled-components';
-import theme from './theme';
+import { theme } from 'modules';
 
-export default class Theme extends React.PureComponent {
+export class Theme extends PureComponent {
   componentWillMount() {
     this.injectGlobalStyle();
   }
 
-  injectGlobalStyle = () => {
-    // require('normalize.css/normalize.css');
-
+  injectGlobalStyle = () => { /* eslint-disable no-unused-expressions */
     injectGlobal`
       #app
       {
@@ -30,8 +29,10 @@ export default class Theme extends React.PureComponent {
       }
 
     `;
-  }
+  } /* eslint-enable no-unused-expressions */
   render() {
-    return <ThemeProvider theme={theme} {...this.props} />;
+    return <ThemeProvider theme={theme.default} {...this.props} />;
   }
 }
+
+export default Theme;

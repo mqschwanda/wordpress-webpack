@@ -9,9 +9,9 @@ export const context = path.resolve(__dirname, '..', '..');
 
 export const joinContext = (...args) => path.join(context, ...args);
 
-const extractStyle = new ExtractTextPlugin({
-  filename: getPath => getPath('../style.css'),
-});
+// const extractStyle = new ExtractTextPlugin({
+//   filename: getPath => getPath('../style.css'),
+// });
 
 const copyWebpack = new CopyWebpackPlugin([{
   context: joinContext(THEME_NAME, 'wp-content'),
@@ -90,7 +90,7 @@ export const compiler = {
       }],
     }, {
       test: /\.css$/,
-      use: extractStyle.extract({
+      use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
           'css-loader',
@@ -98,7 +98,7 @@ export const compiler = {
       }),
     }, {
       test: /\.sass$/,
-      use: extractStyle.extract({
+      use: ExtractTextPlugin.extract({
         fallback: 'style-loader',
         use: [
           'css-loader', // translates CSS into CommonJS
@@ -124,6 +124,9 @@ export const compiler = {
   plugins: [
     copyWebpack,
     writeFile,
-    extractStyle,
+    // extractStyle,
+    new ExtractTextPlugin({
+      filename: getPath => getPath('../style.css'),
+    }),
   ],
 };

@@ -49,7 +49,7 @@ export const WP = axios.create({
 
   // `transformResponse` allows changes to the response data to be made before
   // it is passed to then/catch
-  transformResponse: [data => data.map(mapResponseData)],
+  transformResponse: [data => data && data.map(mapResponseData)],
 
   // `headers` are custom headers to be sent
   // headers: { 'X-Requested-With': 'XMLHttpRequest' },
@@ -162,9 +162,9 @@ export const WP = axios.create({
 const buildOptions = ({ params = {}, ...args } = {}) =>
   ({ ...args, params: { page: 1, per_page: 100, ...params } });
 
-const catchError = (error) => { // eslint-disable no-console
+const catchError = (error) => { /* eslint-disable no-console */
   console.error(error);
-}; // eslint-enable no-console
+}; /* eslint-enable no-console */
 
 const handleNextPage = (res, next) => {
   const totalPages = res.headers['x-wp-totalpages'];

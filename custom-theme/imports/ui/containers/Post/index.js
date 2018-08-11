@@ -2,8 +2,7 @@ import React from 'react';
 import Masonry from 'react-masonry-component';
 
 import { Card, CardContent, CardTitle, Image, ContentBox } from 'components';
-import { pushPath } from 'modules';
-import { decodeHtml } from 'ui/helpers';
+import { pushPath, decodeHtml } from 'modules';
 
 export default ({ ...props }) => (
   <div style={{ width: '100%' }}>
