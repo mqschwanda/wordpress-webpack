@@ -26,11 +26,30 @@ function custom_theme_setup()
    */
   add_theme_support('title-tag');
   // This script styles the visual editor to resemble the theme style
-  function editor_style_js()
+  function editor_style()
   {
-    wp_enqueue_script('editor-bundle', get_theme_file_uri('/assets/bundles/customizer.js'), array(), null, true);
+    wp_enqueue_style(
+      'editor-style',
+      get_theme_file_uri('/assets/stylesheets/editor.css')
+    );
+
+    wp_enqueue_script(
+      'webpack-style-js',
+      get_theme_file_uri('/assets/javascripts/style.js'),
+      array(),
+      null,
+      true
+    );
+
+    wp_enqueue_script(
+      'editor-bundle',
+      get_theme_file_uri('/assets/javascripts/customizer.js'),
+      array(),
+      null,
+      true
+    );
   }
-  add_action('editor_enqueue_scripts', 'editor_style_js');
+  add_action('editor_enqueue_scripts', 'editor_style');
 }
 add_action('after_setup_theme', 'custom_theme_setup');
 
@@ -38,7 +57,27 @@ add_action('after_setup_theme', 'custom_theme_setup');
 // Enqueue scripts and styles.
 function custom_theme_scripts()
 {
-  wp_enqueue_script('webpack-bundle', get_theme_file_uri('/assets/bundles/index.js'), array(), null, true);
+
+  wp_enqueue_style(
+    'webpack-css',
+    get_theme_file_uri('/assets/stylesheets/index.css')
+  );
+
+  wp_enqueue_script(
+    'webpack-style-js',
+    get_theme_file_uri('/assets/javascripts/style.js'),
+    array(),
+    null,
+    true
+  );
+
+  wp_enqueue_script(
+    'webpack-js',
+    get_theme_file_uri('/assets/javascripts/index.js'),
+    array(),
+    null,
+    true
+  );
 }
 add_action('wp_enqueue_scripts', 'custom_theme_scripts');
 

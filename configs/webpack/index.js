@@ -1,7 +1,6 @@
-// import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WriteFilePlugin from 'write-file-webpack-plugin';
-// import ExtractTextPlugin from 'extract-text-webpack-plugin';
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import path from 'path';
 
 export const THEME_NAME = 'custom-theme';
@@ -9,9 +8,16 @@ export const context = path.resolve(__dirname, '..', '..');
 
 export const joinContext = (...args) => path.join(context, ...args);
 
-// const extractStyle = new ExtractTextPlugin({
-//   filename: getPath => getPath('../style.css'),
-// });
+const recursiveIssuer = (m) => {
+  if (m.issuer) return recursiveIssuer(m.issuer);
+  else if (m.name) return m.name;
+
+  return false;
+};
+
+const miniCssExtract = new MiniCssExtractPlugin({
+  filename: 'stylesheets/[name].css',
+});
 
 const copyWebpack = new CopyWebpackPlugin([{
   context: joinContext(THEME_NAME, 'wp-content'),
@@ -50,7 +56,7 @@ export const compiler = {
     ),
   },
   output: {
-    filename: 'bundles/[name].js',
+    filename: 'javascripts/[name].js',
     path: joinContext(
       'wordpress',
       'wp-content',
@@ -91,27 +97,16 @@ export const compiler = {
     }, {
       test: /\.css$/,
       use: [
-        'css-loader',
+        MiniCssExtractPlugin.loader,
+        'css-loader', // translates CSS into CommonJS
       ],
-      // use: ExtractTextPlugin.extract({
-      //   fallback: 'style-loader',
-      //   use: [
-      //     'css-loader',
-      //   ],
-      // }),
     }, {
       test: /\.sass$/,
       use: [
+        MiniCssExtractPlugin.loader,
         'css-loader', // translates CSS into CommonJS
         'sass-loader', // compiles Sass to CSS
       ],
-      // use: ExtractTextPlugin.extract({
-      //   fallback: 'style-loader',
-      //   use: [
-      //     'css-loader', // translates CSS into CommonJS
-      //     'sass-loader', // compiles Sass to CSS
-      //   ],
-      // }),
     }, {
       test: /\.(ttf|eot|otf|woff|woff2)$/,
       use: [{
@@ -131,6 +126,26 @@ export const compiler = {
   plugins: [
     copyWebpack,
     writeFile,
-    // extractStyle,
+    miniCssExtract,
   ],
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        index: {
+          name: 'index',
+          test: (m, c, entry = 'index') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
+        },
+        editor: {
+          name: 'editor',
+          test: (m, c, entry = 'editor') =>
+            m.constructor.name === 'CssModule' && recursiveIssuer(m) === entry,
+          chunks: 'all',
+          enforce: true,
+        },
+      },
+    },
+  },
 };
