@@ -2,6 +2,8 @@ export * as theme from './theme';
 
 export { default as initDevPlugins } from './development';
 
+export { default as get } from './get';
+
 export {
   encodeHtml,
   decodeHtml,

@@ -25,6 +25,7 @@ function custom_theme_setup()
    * provide it for us.
    */
   add_theme_support('title-tag');
+
   // This script styles the visual editor to resemble the theme style
   function editor_style()
   {
