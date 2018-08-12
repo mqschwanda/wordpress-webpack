@@ -1,7 +1,7 @@
 // import webpack from 'webpack';
 import CopyWebpackPlugin from 'copy-webpack-plugin';
 import WriteFilePlugin from 'write-file-webpack-plugin';
-import ExtractTextPlugin from 'extract-text-webpack-plugin';
+// import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import path from 'path';
 
 export const THEME_NAME = 'custom-theme';
@@ -77,7 +77,7 @@ export const compiler = {
     extensions: ['*', '.js', '.jsx'],
   },
   module: {
-    loaders: [{
+    rules: [{
       test: /\.(js|jsx)?$/,
       exclude: /node_modules/,
       use: [{
@@ -90,21 +90,28 @@ export const compiler = {
       }],
     }, {
       test: /\.css$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          'css-loader',
-        ],
-      }),
+      use: [
+        'css-loader',
+      ],
+      // use: ExtractTextPlugin.extract({
+      //   fallback: 'style-loader',
+      //   use: [
+      //     'css-loader',
+      //   ],
+      // }),
     }, {
       test: /\.sass$/,
-      use: ExtractTextPlugin.extract({
-        fallback: 'style-loader',
-        use: [
-          'css-loader', // translates CSS into CommonJS
-          'sass-loader', // compiles Sass to CSS
-        ],
-      }),
+      use: [
+        'css-loader', // translates CSS into CommonJS
+        'sass-loader', // compiles Sass to CSS
+      ],
+      // use: ExtractTextPlugin.extract({
+      //   fallback: 'style-loader',
+      //   use: [
+      //     'css-loader', // translates CSS into CommonJS
+      //     'sass-loader', // compiles Sass to CSS
+      //   ],
+      // }),
     }, {
       test: /\.(ttf|eot|otf|woff|woff2)$/,
       use: [{
@@ -125,8 +132,5 @@ export const compiler = {
     copyWebpack,
     writeFile,
     // extractStyle,
-    new ExtractTextPlugin({
-      filename: getPath => getPath('../style.css'),
-    }),
   ],
 };

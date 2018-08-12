@@ -14,6 +14,8 @@ const uglify = new UglifyJsPlugin({
 });
 
 compiler.devtool = 'source-map';
+compiler.mode = 'production';
+
 
 compiler.plugins = [
   ...compiler.plugins,
